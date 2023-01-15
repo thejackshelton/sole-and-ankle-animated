@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
-import styled from 'styled-components/macro';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
+import React from "react";
+import styled, { keyframes } from "styled-components/macro";
+import { DialogOverlay, DialogContent } from "@reach/dialog";
 
-import { QUERIES, WEIGHTS } from '../../constants';
+import { QUERIES, WEIGHTS } from "../../constants";
 
-import UnstyledButton from '../UnstyledButton';
-import Icon from '../Icon';
-import VisuallyHidden from '../VisuallyHidden';
+import UnstyledButton from "../UnstyledButton";
+import Icon from "../Icon";
+import VisuallyHidden from "../VisuallyHidden";
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
   return (
@@ -36,6 +36,24 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
   );
 };
 
+const slide = keyframes`
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+`;
+
+const fade = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
 const Overlay = styled(DialogOverlay)`
   position: fixed;
   top: 0;
@@ -45,6 +63,8 @@ const Overlay = styled(DialogOverlay)`
   background: var(--color-backdrop);
   display: flex;
   justify-content: flex-end;
+  animation: ${fade} 500ms both ease-in-out;
+  will-change: opacity;
 `;
 
 const Content = styled(DialogContent)`
@@ -54,6 +74,8 @@ const Content = styled(DialogContent)`
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
+  animation: ${slide} 900ms both ease-in-out;
+  will-change: transform;
 `;
 
 const CloseButton = styled(UnstyledButton)`
@@ -75,9 +97,26 @@ const NavLink = styled.a`
   text-decoration: none;
   font-size: 1.125rem;
   text-transform: uppercase;
+  will-change: transform;
 
-  &:first-of-type {
+  &:nth-child(1) {
     color: var(--color-secondary);
+    animation: ${slide} 250ms both ease-out;
+  }
+  &:nth-child(2) {
+    animation: ${slide} 450ms both ease-out;
+  }
+  &:nth-child(3) {
+    animation: ${slide} 700ms both ease-out;
+  }
+  &:nth-child(4) {
+    animation: ${slide} 850ms both ease-out;
+  }
+  &:nth-child(5) {
+    animation: ${slide} 950ms both ease-out;
+  }
+  &:nth-child(6) {
+    animation: ${slide} 1150ms both ease-out;
   }
 `;
 
@@ -90,6 +129,7 @@ const Footer = styled.footer`
   flex-direction: column;
   gap: 14px;
   justify-content: flex-end;
+  animation: ${fade} 1150ms both cubic-bezier(0.17, 0.67, 0.88, 0.33);
 `;
 
 const SubLink = styled.a`
